@@ -19,13 +19,13 @@ along with com_mapfactory.  If not, see <http://www.gnu.org/licenses/>.
 Created on 12 sept. 2012
 By bozzo
 -->
-<install type="component" version="2.5.0" method="upgrade">
-	<name>Map Factory</name>
+<extension type="component" version="2.5.0" method="upgrade">
+	<name>com_mapfactory</name>
 	<creationDate>Septembre 2012</creationDate>
-	<author>Boris BARNIER</author>
+	<author>Boris Barnier</author>
 	<authorEmail>b.barnier@gmail.com</authorEmail>
 	<authorUrl></authorUrl>
-	<copyright></copyright>
+	<copyright>(C) 2012 - 2013 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU/GPLv3</license>
 	<version>1.0</version>
 	<description>Composant de permettant de visualiser une carte OSM, gMaps, Geoportail...</description>
@@ -38,7 +38,11 @@ By bozzo
 		<folder>views</folder>
 		<folder>assets</folder>
 	</files>
-
+	
+	<media folder="media" destination="com_mapfactory">
+	    <folder>css</folder>
+    </media>
+    
 	<administration>
 		<menu link="option=com_mapfactory" img="components/assets/images/icons/map_factory.png">Map Factory</menu>
 		<files folder="admin">
@@ -50,4 +54,4 @@ By bozzo
 			<language tag="fr-FR">fr-FR/fr-FR.com_mapfactory.ini</language>
 		</languages>
 	</administration>
-</install>
+</extension>
