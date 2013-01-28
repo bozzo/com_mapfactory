@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is part of com_mapfactory.
+
+com_mapfactory is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+com_mapfactory is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with com_mapfactory.  If not, see <http://www.gnu.org/licenses/>.
+
+Created on 12 sept. 2012
+By bozzo
+-->
+<metadata>
+
+    <layout title="Default Map" >
+
+        <message>
+<![CDATA[Display the default map]]></message>
+    </layout>
+
+    <fields name="params" >
+
+        <fieldset name="basic" >
+
+            <field name="com_mapfactory_page_title"
+                default=""
+                description="COM_MAPFACTORY_PAGE_TITLE_PARAM_DESC"
+                label="COM_MAPFACTORY_PAGE_TITLE_PARAM_LABEL"
+                type="text" />
+            <field
+                name="com_mapfactory_center_lat"
+                default="0.0"
+                description="COM_MAPFACTORY_CENTER_LAT_PARAM_DESC"
+                label="COM_MAPFACTORY_CENTER_LAT_PARAM_LABEL"
+                type="text" />
+
+            <field name="com_mapfactory_center_lon"
+                default="0.0"
+                description="COM_MAPFACTORY_CENTER_LON_PARAM_DESC"
+                label="COM_MAPFACTORY_CENTER_LON_PARAM_LABEL"
+                type="text" />
+
+            <field name="com_mapfactory_map_kind" 
+                type="list" 
+                default="OSM" 
+                label="COM_MAPFACTORY_SELECT_MAP_KIND_PARAM_LABEL" 
+                description="COM_MAPFACTORY_SELECT_MAP_KIND_PARAM_DESC">
+			  <option value="OSM">COM_MAPFACTORY_SELECT_MAP_KIND_OSM_PARAM_LABEL</option>
+			  <option value="GoogleMaps">COM_MAPFACTORY_SELECT_MAP_KIND_GMAP_PARAM_LABEL</option>
+			  <option value="Geoportail">COM_MAPFACTORY_SELECT_MAP_KIND_GP_PARAM_LABEL</option>
+			</field>
+			
+            <field name="com_mapfactory_gp_api_key"
+                default=""
+                description="COM_MAPFACTORY_GP_API_KEY_PARAM_DESC"
+                label="COM_MAPFACTORY_GP_API_KEY_PARAM_LABEL"
+                type="text" />
+            
+        </fieldset>
+        <fieldset name="track" >
+        	<field type="spacer"
+        	    name="myspacer"
+				label="COM_MAPFACTORY_TRACK_LABEL" />
+   
+            
+            <field name="com_mapfactory_track_osm_file" 
+                type="filelist" 
+                default="" 
+                label="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_LABEL" 
+                description="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_DESC" 
+                directory="media/com_mapfactory" 
+                filter="\.osm$" 
+                exclude="" 
+                stripext=""
+				hide_default="true"/>
+            
+            <field name="com_mapfactory_track_osm_title"
+                default=""
+                description="COM_MAPFACTORY_TRACK_OSM_TITLE_PARAM_DESC"
+                label="COM_MAPFACTORY_TRACK_OSM_TITLE_PARAM_LABEL"
+                type="text" />
+            
+            <field name="com_mapfactory_track_osm_width"
+                default="5"
+                description="COM_MAPFACTORY_TRACK_OSM_WIDTH_PARAM_DESC"
+                label="COM_MAPFACTORY_TRACK_OSM_WIDTH_PARAM_LABEL"
+                type="text"
+                filter="integer" />
+            
+            <field name="com_mapfactory_track_osm_opacity"
+                default="0.7"
+                description="COM_MAPFACTORY_TRACK_OSM_OPACITY_PARAM_DESC"
+                label="COM_MAPFACTORY_TRACK_OSM_OPACITY_PARAM_LABEL"
+                type="text" />
+            
+            <field name="com_mapfactory_track_osm_color"
+                default="#000000"
+                description="COM_MAPFACTORY_TRACK_OSM_COLOR_PARAM_DESC"
+                label="COM_MAPFACTORY_TRACK_OSM_COLOR_PARAM_LABEL"
+                type="text" />
+        </fieldset>
+    </fields>
+
+    <!-- <fields name="request" >
+
+        <fieldset name="request" >
+
+            <field
+                name="center_lat"
+                default="0.0"
+                description="CENTER_LAT_DESC"
+                label="CENTER_LAT"
+                type="text" />
+
+            <field
+                name="center_lon"
+                default="0.0"
+                description="CENTER_LON_DESC"
+                label="CENTER_LON"
+                type="text" />
+        </fieldset>
+    </fields> -->
+
+    <state>
+
+        <name>
+Default Map
+        </name>
+
+        <description>
+Display the default map
+        </description>
+
+        <url />
+
+        <params>
+
+            <param
+                name="center_lat"
+                default="0.0"
+                description="Latitude du centre de la carte"
+                label="Latitude du centre"
+                type="text" />
+
+            <param
+                name="center_lon"
+                default="0.0"
+                description="Longitude du centre de la carte"
+                label="Longitude du centre"
+                type="text" />
+        </params>
+    </state>
+
+</metadata>
