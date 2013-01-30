@@ -39,15 +39,40 @@ By bozzo
 		<folder>assets</folder>
 	</files>
 	
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall -->
+    	<sql>
+        	<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+    	</sql>
+    </uninstall>
+    <update> <!-- Runs on update; New in 2.5 -->
+    	<schemas>
+        	<schemapath type="mysql">sql/updates/mysql</schemapath>
+    	</schemas>
+    </update>
+        
 	<media folder="media" destination="com_mapfactory">
 	    <folder>css</folder>
     </media>
     
 	<administration>
-		<menu link="option=com_mapfactory" img="/components/com_mapfactory/assets/images/icons/map_factory_16.png">Map Factory</menu>
+		<menu link="option=com_mapfactory" img="../components/com_mapfactory/assets/images/icons/map_factory_16.png">Map Factory</menu>
 		<files folder="admin">
 			<filename>index.html</filename>
-		</files>
+            <filename>mapfactory.php</filename>
+            <filename>controller.php</filename>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>models</folder>
+            <!-- views files section -->
+            <folder>views</folder>
+            <!-- controllers files section -->
+            <folder>controllers</folder>
+    	</files>                
 		
 		<languages folder="admin/language">
 			<language tag="en-GB">en-GB/en-GB.com_mapfactory.ini</language>
