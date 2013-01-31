@@ -60,7 +60,7 @@ class MapFactoryViewFile extends JView {
 	{
 		$input = JFactory::getApplication()->input;
 		$input->set('hidemainmenu', true);
-		$isNew = ($this->item["id"] == 0);
+		$isNew = ($this->item->id == 0);
 		JToolBarHelper::title($isNew ? JText::_('COM_MAPFACTORY_MANAGER_FILE_NEW') : JText::_('COM_MAPFACTORY_MANAGER_FILE_EDIT'));
 		JToolBarHelper::save('file.save');
 		JToolBarHelper::cancel('file.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');

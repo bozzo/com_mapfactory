@@ -28,7 +28,7 @@ jimport('joomla.database.table');
 /**
  * Hello Table class
  */
-class MapFactoryTableFiles extends JTable
+class MapFactoryTableFile extends JTable
 {
         /**
          * Constructor

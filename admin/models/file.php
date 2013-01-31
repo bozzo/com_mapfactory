@@ -36,7 +36,7 @@ class MapFactoryModelFile extends JModelAdmin
          * @return      JTable  A database object
          * @since       2.5
          */
-        public function getTable($type = 'Files', $prefix = 'MapFactoryTable', $config = array()) 
+        public function getTable($type = 'File', $prefix = 'MapFactoryTable', $config = array()) 
         {
                 return JTable::getInstance($type, $prefix, $config);
         }
