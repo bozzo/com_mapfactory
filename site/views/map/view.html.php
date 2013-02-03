@@ -80,10 +80,7 @@ class MapFactoryViewMap extends JView {
 				break;
 		}
 			
-		$style = "#MapFactoryMap { min-width: 100px; }";
-		$style .= ".MapFactoryMapFullscreen { height: 100%; }";
-		$style .= ".MapFactoryMapSmallscreen { height: 600px; }";
-		$doc->addStyleDeclaration( $style );
+		$doc->addStyleSheet( "media/com_mapfactory/css/com_mapfactory_default.css" );
 		
 
 		// Display the view
@@ -121,6 +118,72 @@ class MapFactoryViewMap extends JView {
 
 		//$map .= "	$varName.addLayers([layer]);";
 
+		return $map;
+	}
+
+	function getOsmLayerGP($varName)
+	{
+		$map = "	$varName.getMap().addLayer(\"OSM\",";
+		$map .= "		\"" . $this->osmTitle . "\",";
+		$map .= "		\"media/com_mapfactory/" . $this->osmFile . "\",";
+		$map .= "		{";
+		$map .= "			visibility:true,";
+		$map .= "			styleMap:OpenLayers.StyleMap({";
+		$map .= "				\"default\": new OpenLayers.Style(";
+		$map .= "					OpenLayers.Util.applyDefaults({";
+		$map .= "						strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity;
+		$map .= "					},OpenLayers.Feature.Vector.style[\"default\"]))";
+		$map .= "	})});";
+	
+		/*new OpenLayers.StyleMap({
+		 "default": new OpenLayers.Style(
+		 		OpenLayers.Util.applyDefaults({
+		 				fillColor: "#FFFF00",
+		 				fillOpacity: 0.75,
+		 				strokeColor: "#FF9900",
+		 				strokeWidth: 2,
+		 				graphicZIndex: "${zIndex}",
+		 				graphicName: "triangle",
+		 				pointRadius: 8,
+		 				//see context object below
+		 				label:"${getName}",
+		 				labelAlign: "rb",
+		 				labelXOffset: -20,
+		 				labelYOffset: -20,
+		 				labelBackgroundColor: "#FFFF00",
+		 				labelBorderColor: "black",
+		 				labelBorderSize: "1px",
+		 				fontColor: "black",
+		 				fontWeight: "bold",
+		 				fontSize: "12px",
+		 				fontFamily: "Courier New, monospace"
+		 				},OpenLayers.Feature.Vector.style["default"]),{
+		 		/**
+				 * The context object contains a function which is referenced in the symbolizer
+				 * This function will be called with the feature as an argument when using the appropriate style("temporary")
+				 *
+				 * L'objet contexte contient une fonction appelée dans le symboliseur
+				 * Cette fonction qui prend comme argument feature ,sera appelée lors de l'utilisation du style "temporary"
+				 *//*
+		 		context:{
+					getName: function(f) {
+		 		if (f.attributes['typeName']=='wpt') {
+		 		return f.attributes['name'];
+		 		}
+		 		return '';
+					}
+		 		}
+		 		}),
+				"select": new OpenLayers.Style(
+						OpenLayers.Util.applyDefaults({
+								fillColor: "#FF9900",
+								fillOpacity: 0.75,
+								strokeColor: "#FFFF00",
+								strokeWidth: 4,
+								pointRadius: 12
+								},OpenLayers.Feature.Vector.style["select"]))
+				}),*/
+	
 		return $map;
 	}
 

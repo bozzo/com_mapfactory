@@ -26,12 +26,14 @@ By bozzo
                 />
                 <field
                         name="filename"
-                        type="text"
-                        label="COM_MAPFACTORY_FILE_FILENAME_LABEL"
-                        description="COM_MAPFACTORY_FILE_FILENAME_DESC"
-                        size="50"
-                        class="inputbox"
-                        default=""
-                />
+		                type="filelist" 
+		                default="" 
+		                label="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_LABEL" 
+		                description="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_DESC" 
+		                directory="media/com_mapfactory" 
+		                filter="\.osm$" 
+		                exclude="" 
+		                stripext=""
+						hide_default="true"/>
         </fieldset>
 </form>
