@@ -27,9 +27,7 @@ By bozzo
     </layout>
 
     <fields name="params" >
-
         <fieldset name="basic" >
-
             <field name="com_mapfactory_page_title"
                 default=""
                 description="COM_MAPFACTORY_PAGE_TITLE_PARAM_DESC"
@@ -56,7 +54,30 @@ By bozzo
 			  <option value="OSM">COM_MAPFACTORY_SELECT_MAP_KIND_OSM_PARAM_LABEL</option>
 			  <option value="GoogleMaps">COM_MAPFACTORY_SELECT_MAP_KIND_GMAP_PARAM_LABEL</option>
 			  <option value="Geoportail">COM_MAPFACTORY_SELECT_MAP_KIND_GP_PARAM_LABEL</option>
+			</field>            
+        </fieldset>
+        
+        <fieldset name="osm" >
+			
+            <field name="com_mapfactory_osm_layers" 
+                type="list" 
+                default="OSM" 
+                label="COM_MAPFACTORY_SELECT_OSM_LAYERS_PARAM_LABEL" 
+                description="COM_MAPFACTORY_SELECT_OSM_LAYERS_PARAM_DESC"
+                multiple="true">
+			  <option value="OSM">COM_MAPFACTORY_SELECT_OSM_LAYERS_OSM_PARAM_LABEL</option>
+			  <option value="Cycle">COM_MAPFACTORY_SELECT_OSM_LAYERS_CYCLE_PARAM_LABEL</option>
+			  <option value="Landscape">COM_MAPFACTORY_SELECT_OSM_LAYERS_LAND_PARAM_LABEL</option>
+			  <option value="Transport">COM_MAPFACTORY_SELECT_OSM_LAYERS_TRANSPORT_PARAM_LABEL</option>
+			  <option value="GMap">COM_MAPFACTORY_SELECT_OSM_LAYERS_GMAP_PARAM_LABEL</option>
+			  <option value="GHybrid">COM_MAPFACTORY_SELECT_OSM_LAYERS_GHYBRID_PARAM_LABEL</option>
+			  <option value="GSatellite">COM_MAPFACTORY_SELECT_OSM_LAYERS_GSATELLITE_PARAM_LABEL</option>
+			  <option value="GPhysical">COM_MAPFACTORY_SELECT_OSM_LAYERS_GPHYSICAL_PARAM_LABEL</option>
 			</field>
+            
+        </fieldset>
+        
+        <fieldset name="geoportail" >
 			
             <field name="com_mapfactory_gp_api_key"
                 default=""
@@ -65,6 +86,7 @@ By bozzo
                 type="text" />
             
         </fieldset>
+        
         <fieldset name="track" >
         	<field type="spacer"
         	    name="myspacer"

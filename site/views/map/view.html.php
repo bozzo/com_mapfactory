@@ -52,8 +52,13 @@ class MapFactoryViewMap extends JView {
 		$this->msg = $params->get('com_mapfactory_page_title');
 		$this->center_lon = $params->get('com_mapfactory_center_lon');
 		$this->center_lat = $params->get('com_mapfactory_center_lat');
-		$this->gpApiKey = $params->get('com_mapfactory_gp_api_key');
 		$this->mapKind = $params->get('com_mapfactory_map_kind');
+		
+		// Geoportail
+		$this->gpApiKey = $params->get('com_mapfactory_gp_api_key');
+		
+		// osm
+		$this->osmLayers = $params->get('com_mapfactory_osm_layers');
 		
 		// track
 		$this->osmFile = $params->get('com_mapfactory_track_osm_file');
@@ -79,9 +84,8 @@ class MapFactoryViewMap extends JView {
 				$this->isGeoportail = true;		
 				break;
 		}
-			
-		$doc->addStyleSheet( "media/com_mapfactory/css/com_mapfactory_default.css" );
-		
+
+		$doc->addStyleSheet( "media/com_mapfactory/css/com_mapfactory_default.css" );		
 
 		// Display the view
 		parent::display($tpl);
@@ -123,70 +127,70 @@ class MapFactoryViewMap extends JView {
 
 	function getOsmLayerGP($varName)
 	{
-		$map = "	$varName.getMap().addLayer(\"OSM\",";
-		$map .= "		\"" . $this->osmTitle . "\",";
-		$map .= "		\"media/com_mapfactory/" . $this->osmFile . "\",";
-		$map .= "		{";
-		$map .= "			visibility:true,";
-		$map .= "			styleMap:OpenLayers.StyleMap({";
-		$map .= "				\"default\": new OpenLayers.Style(";
-		$map .= "					OpenLayers.Util.applyDefaults({";
-		$map .= "						strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity;
-		$map .= "					},OpenLayers.Feature.Vector.style[\"default\"]))";
-		$map .= "	})});";
-	
+		$map = "$varName.getMap().addLayer(\"OSM\",";
+		$map .= "\"" . $this->osmTitle . "\",";
+		$map .= "\"media/com_mapfactory/" . $this->osmFile . "\",";
+		$map .= "{";
+		$map .= "	visibility:true,";
+		$map .= "	styleMap:OpenLayers.StyleMap({";
+		$map .= "		\"default\": new OpenLayers.Style(";
+		$map .= "			OpenLayers.Util.applyDefaults({";
+		$map .= "				strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity;
+		$map .= "			},OpenLayers.Feature.Vector.style[\"default\"]))";
+		$map .= "})});";
+		
 		/*new OpenLayers.StyleMap({
-		 "default": new OpenLayers.Style(
-		 		OpenLayers.Util.applyDefaults({
-		 				fillColor: "#FFFF00",
-		 				fillOpacity: 0.75,
-		 				strokeColor: "#FF9900",
-		 				strokeWidth: 2,
-		 				graphicZIndex: "${zIndex}",
-		 				graphicName: "triangle",
-		 				pointRadius: 8,
-		 				//see context object below
-		 				label:"${getName}",
-		 				labelAlign: "rb",
-		 				labelXOffset: -20,
-		 				labelYOffset: -20,
-		 				labelBackgroundColor: "#FFFF00",
-		 				labelBorderColor: "black",
-		 				labelBorderSize: "1px",
-		 				fontColor: "black",
-		 				fontWeight: "bold",
-		 				fontSize: "12px",
-		 				fontFamily: "Courier New, monospace"
-		 				},OpenLayers.Feature.Vector.style["default"]),{
-		 		/**
-				 * The context object contains a function which is referenced in the symbolizer
-				 * This function will be called with the feature as an argument when using the appropriate style("temporary")
-				 *
-				 * L'objet contexte contient une fonction appelée dans le symboliseur
-				 * Cette fonction qui prend comme argument feature ,sera appelée lors de l'utilisation du style "temporary"
-				 *//*
-		 		context:{
-					getName: function(f) {
-		 		if (f.attributes['typeName']=='wpt') {
-		 		return f.attributes['name'];
-		 		}
-		 		return '';
+			"default": new OpenLayers.Style(
+					OpenLayers.Util.applyDefaults({
+				fillColor: "#FFFF00",
+				fillOpacity: 0.75,
+				strokeColor: "#FF9900",
+				strokeWidth: 2,
+				graphicZIndex: "${zIndex}",
+				graphicName: "triangle",
+				pointRadius: 8,
+				//see context object below
+				label:"${getName}",
+				labelAlign: "rb",
+				labelXOffset: -20,
+				labelYOffset: -20,
+				labelBackgroundColor: "#FFFF00",
+				labelBorderColor: "black",
+				labelBorderSize: "1px",
+				fontColor: "black",
+				fontWeight: "bold",
+				fontSize: "12px",
+				fontFamily: "Courier New, monospace"
+		},OpenLayers.Feature.Vector.style["default"]),{
+			/**
+			 * The context object contains a function which is referenced in the symbolizer
+			 * This function will be called with the feature as an argument when using the appropriate style("temporary")
+			 *
+			 * L'objet contexte contient une fonction appelée dans le symboliseur
+			 * Cette fonction qui prend comme argument feature ,sera appelée lors de l'utilisation du style "temporary"
+			 *//*
+			context:{
+				getName: function(f) {
+					if (f.attributes['typeName']=='wpt') {
+						return f.attributes['name'];
 					}
-		 		}
-		 		}),
-				"select": new OpenLayers.Style(
-						OpenLayers.Util.applyDefaults({
-								fillColor: "#FF9900",
-								fillOpacity: 0.75,
-								strokeColor: "#FFFF00",
-								strokeWidth: 4,
-								pointRadius: 12
-								},OpenLayers.Feature.Vector.style["select"]))
-				}),*/
-	
+					return '';
+				}
+			}
+		}),
+		"select": new OpenLayers.Style(
+				OpenLayers.Util.applyDefaults({
+			fillColor: "#FF9900",
+			fillOpacity: 0.75,
+			strokeColor: "#FFFF00",
+			strokeWidth: 4,
+			pointRadius: 12
+		},OpenLayers.Feature.Vector.style["select"]))
+		}),*/
+		
 		return $map;
 	}
-
+	
 	function getGeoportailMap()
 	{
 		$map = "function initGeoportailMap() {";
@@ -212,6 +216,11 @@ class MapFactoryViewMap extends JView {
 		//$map .= "	// ----- Layers";
 		$map .= "	viewer.addGeoportalLayers(['ORTHOIMAGERY.ORTHOPHOTOS','GEOGRAPHICALGRIDSYSTEMS.MAPS']);";
 
+		if ($this->osmFile != '-1')
+		{
+			$map .= $this->getOsmLayerGP("viewer");
+		}
+		
 		//$map .= "	// ----- Autres";
 		$map .= "	viewer.getMap().setCenterAtLonLat(" . $this->center_lat . "," . $this->center_lon . ");";
 		
@@ -220,10 +229,10 @@ class MapFactoryViewMap extends JView {
 		return $map;
 	}
 
-	function getOsmMap()
+	function getOSMMap()
 	{
 		// TODO add configuration option to chooce which layer print
-		$map = "function initOsmMap() {";
+		$map = "function initMap() {";
 		$map .= "	var options = {";
 		$map .= "		controls: [";
 		$map .= "			new OpenLayers.Control.Navigation(),";
@@ -234,24 +243,16 @@ class MapFactoryViewMap extends JView {
 		$map .= "	};";
 
 		$map .= "	map = new OpenLayers.Map(\"MapFactoryMap\",options);";
-		$map .= "	var mapnik = new OpenLayers.Layer.OSM();";
-
-		$map .= '	var layerCycleMap = new OpenLayers.Layer.OSM("OpenCycleMap", ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png",';
-		$map .= '		"http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png",';
-		$map .= '		"http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"]);';
-
-		$map .= '	var layerTransport = new OpenLayers.Layer.OSM("Transport", ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",';
-		$map .= '		"http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",';
-		$map .= '		"http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"]);';
-
-		$map .= '	var layerLandscape = new OpenLayers.Layer.OSM("Landscape", ["http://a.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",';
-		$map .= '		"http://b.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",';
-		$map .= '		"http://c.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png"]);';
-
-		$map .= "	map.addLayer(layerCycleMap);";
-		$map .= "	map.addLayer(mapnik);";
-		$map .= "	map.addLayer(layerLandscape);";
-		$map .= "	map.addLayer(layerTransport);";
+					
+		if (in_array("OSM",$this->osmLayers)) 			$map .= $this->addOsmMapnik("map");
+		if (in_array("Cycle",$this->osmLayers)) 		$map .= $this->addOsmCycle("map");
+		if (in_array("Transport",$this->osmLayers)) 	$map .= $this->addOsmTransport("map");
+		if (in_array("Landscape",$this->osmLayers)) 	$map .= $this->addOsmLandscape("map");
+		
+		if (in_array("GMap",$this->osmLayers)) 			$map .= $this->addGoogleMapStreets("map");
+		if (in_array("GSatellite",$this->osmLayers)) 	$map .= $this->addGoogleMapSatellite("map");
+		if (in_array("GPhysical",$this->osmLayers)) 	$map .= $this->addGoogleMapPhysical("map");
+		if (in_array("GHybrid",$this->osmLayers)) 		$map .= $this->addGoogleMapHybrid("map");
 
 		if ($this->osmFile != '-1')
 		{
@@ -270,45 +271,73 @@ class MapFactoryViewMap extends JView {
 		return $map;
 	}
 
-	function getGoogleMap()
+	function addOsmMapnik($varName)
 	{
-		// TODO add configuration option to chooce which layer print
-		$map = "function initGoogleMap() {";
-		$map .= "	var options = {";
-		$map .= "		controls: [";
-		$map .= "			new OpenLayers.Control.Navigation(),";
-		$map .= "			new OpenLayers.Control.PanZoomBar(),";
-		$map .= "			new OpenLayers.Control.Attribution(),";
-		$map .= "			new OpenLayers.Control.LayerSwitcher({'ascending':false})";
-		$map .= "		]";
-		$map .= "	};";
+		$map = "var mapnik = new OpenLayers.Layer.OSM();";
+		$map .= "$varName.addLayer(mapnik);";
 
-		$map .= "	map = new OpenLayers.Map(\"MapFactoryMap\",options);";
-		
-		$map .= "	var gphy = new OpenLayers.Layer.Google(\"Google Physical\",{type: google.maps.MapTypeId.TERRAIN});";
-		$map .= "	var gmap = new OpenLayers.Layer.Google(\"Google Streets\",{numZoomLevels: 20});";
-		$map .= "	var ghyb = new OpenLayers.Layer.Google(\"Google Hybrid\",{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20});";
-		$map .= "	var gsat = new OpenLayers.Layer.Google(\"Google Satellite\",{type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22});";
+		return $map;
+	}
 
-		$map .= "	map.addLayer(gmap);";
-		$map .= "	map.addLayer(ghyb);";
-		$map .= "	map.addLayer(gsat);";
-		$map .= "	map.addLayer(gphy);";
+	function addOsmCycle($varName)
+	{
+		$map = 'var layerCycleMap = new OpenLayers.Layer.OSM("OpenCycleMap", ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png",';
+		$map .= '	"http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png",';
+		$map .= '	"http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"]);';
+		$map .= "$varName.addLayer(layerCycleMap);";
 
-		if ($this->osmFile != '-1')
-		{
-			$map .= $this->getOsmLayer("map");
-		}
-		
-		$map .= "	map.setCenter(new OpenLayers.LonLat(" . $this->center_lat . "," . $this->center_lon . ")";
-		$map .= "		.transform(";
-		$map .= "		new OpenLayers.Projection(\"EPSG:4326\"),";
-		$map .= "		new OpenLayers.Projection(\"EPSG:900913\")";
-		$map .= "		), 15";
-		$map .= "	);";
-		
-		$map .= "}";
+		return $map;
+	}
 
+	function addOsmTransport($varName)
+	{
+		$map = 'var layerTransport = new OpenLayers.Layer.OSM("Transport", ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",';
+		$map .= '	"http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",';
+		$map .= '	"http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"]);';
+		$map .= "$varName.addLayer(layerTransport);";
+
+		return $map;
+	}
+
+	function addOsmLandscape($varName)
+	{
+		$map = 'var layerLandscape = new OpenLayers.Layer.OSM("Landscape", ["http://a.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",';
+		$map .= '	"http://b.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",';
+		$map .= '	"http://c.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png"]);';
+		$map .= "$varName.addLayer(layerLandscape);";
+
+		return $map;
+	}
+
+	function addGoogleMapPhysical($varName)
+	{
+		$map = "var gphy = new OpenLayers.Layer.Google(\"Google Physical\",{type: google.maps.MapTypeId.TERRAIN});";
+		$map .= "$varName.addLayer(gphy);";
+	
+		return $map;
+	}
+
+	function addGoogleMapStreets($varName)
+	{
+		$map = "var gmap = new OpenLayers.Layer.Google(\"Google Streets\",{numZoomLevels: 20});";
+		$map .= "$varName.addLayer(gmap);";
+	
+		return $map;
+	}
+
+	function addGoogleMapHybrid($varName)
+	{
+		$map = "var ghyb = new OpenLayers.Layer.Google(\"Google Hybrid\",{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20});";
+		$map .= "$varName.addLayer(ghyb);";
+	
+		return $map;
+	}
+
+	function addGoogleMapSatellite($varName)
+	{
+		$map = "var gsat = new OpenLayers.Layer.Google(\"Google Satellite\",{type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22});";
+		$map .= "$varName.addLayer(gsat);";
+	
 		return $map;
 	}
 
@@ -318,12 +347,9 @@ class MapFactoryViewMap extends JView {
 		switch ($this->mapKind)
 		{
 			case self::$MAP_KIND_GMAP :
-				$map .= $this->getGoogleMap();
-				$map .= "initGoogleMap();";	
-				break;
 			case self::$MAP_KIND_OSM :
 				$map .= $this->getOsmMap();	
-				$map .= "initOsmMap();";		
+				$map .= "initMap();";		
 				break;
 			case self::$MAP_KIND_GEOP:
 				$map .= $this->getGeoportailMap();
