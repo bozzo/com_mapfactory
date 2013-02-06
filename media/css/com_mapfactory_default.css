@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+#MapFactoryMap {
+	min-width: 100px;
+}
+
+.MapFactoryMapFullscreen {
+	height: 100%;
+}
+
+.MapFactoryMapSmallscreen {
+	height: 600px;
+}
