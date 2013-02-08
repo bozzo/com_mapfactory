@@ -56,9 +56,10 @@ class MapFactoryViewFiles extends JView {
 	protected function addToolBar()
 	{
 		JToolBarHelper::title(JText::_('COM_MAPFACTORY_MANAGER_FILES'));
-		JToolBarHelper::deleteList('', 'files.delete');
-		JToolBarHelper::editList('file.edit');
+		JToolBarHelper::media_manager('com_mapfactory/osm','Upload');
 		JToolBarHelper::addNew('file.add');
+		JToolBarHelper::editList('file.edit');
+		JToolBarHelper::deleteList('', 'files.delete');
 	}
 }
 ?>

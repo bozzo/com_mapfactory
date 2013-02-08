@@ -30,6 +30,9 @@ By bozzo
 	<version>0.0.1</version>
 	<description>Composant de permettant de visualiser une carte OSM, gMaps, Geoportail...</description>
 
+	<!-- Runs on install/uninstall/update; New in 2.5 -->
+    <scriptfile>script.php</scriptfile>
+    
 	<files folder="site">
 		<filename>index.html</filename>
 		<filename>mapfactory.php</filename>
@@ -39,6 +42,7 @@ By bozzo
 		<folder>assets</folder>
 	</files>
 	
+        
 	<install> <!-- Runs on install -->
 		<sql>
 			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
