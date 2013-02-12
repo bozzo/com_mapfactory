@@ -98,7 +98,7 @@ By bozzo
                 default="" 
                 label="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_LABEL" 
                 description="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_DESC" 
-                directory="media/com_mapfactory" 
+                directory="images/com_mapfactory/osm" 
                 filter="\.osm$" 
                 exclude="" 
                 stripext=""
