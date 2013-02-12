@@ -38,18 +38,6 @@ class com_mapfactoryInstallerScript
 	 */
 	function install($parent)
 	{
-		// create a folder inside your images folder
-		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'osm')) {
-			echo "OSM Folder created successfully";
-		} else {
-			echo "Unable to create OSM folder";
-		}
-		// create a folder inside your images folder
-		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'gpx')) {
-			echo "GPX Folder created successfully";
-		} else {
-			echo "Unable to create GPX folder";
-		}
 		// $parent is the class calling this method
 		//$parent->getParent()->setRedirectURL('index.php?option=com_helloworld');
 	}
@@ -72,18 +60,6 @@ class com_mapfactoryInstallerScript
 	 */
 	function update($parent)
 	{
-		// create a folder inside your images folder
-		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'osm')) {
-			echo "OSM Folder created successfully";
-		} else {
-			echo "Unable to create OSM folder";
-		}
-		// create a folder inside your images folder
-		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'gpx')) {
-			echo "GPX Folder created successfully";
-		} else {
-			echo "Unable to create GPX folder";
-		}
 		// $parent is the class calling this method
 		//echo '<p>' . JText::sprintf('COM_HELLOWORLD_UPDATE_TEXT', $parent->get('manifest')->version) . '</p>';
 	}
