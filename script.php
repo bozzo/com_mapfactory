@@ -107,6 +107,19 @@ class com_mapfactoryInstallerScript
 	 */
 	function postflight($type, $parent)
 	{
+
+		// create a folder inside your images folder
+		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'osm')) {
+			//echo "OSM Folder created successfully";
+		} else {
+			echo "<p>Unable to create OSM folder</p>";
+		}
+		// create a folder inside your images folder
+		if(JFolder::create(JPATH_ROOT.DS.'images'.DS.'com_mapfactory'.DS.'gpx')) {
+			//echo "GPX Folder created successfully";
+		} else {
+			echo "<p>Unable to create GPX folder</p>";
+		}
 		// $parent is the class calling this method
 		// $type is the type of change (install, update or discover_install)
 		//echo '<p>' . JText::_('COM_HELLOWORLD_POSTFLIGHT_' . $type . '_TEXT') . '</p>';

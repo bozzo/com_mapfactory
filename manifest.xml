@@ -62,6 +62,10 @@ By bozzo
 	<media folder="media" destination="com_mapfactory">
 	    <folder>css</folder>
     </media>
+        
+	<media folder="images" destination="com_mapfactory">
+	    <folder>osm</folder>
+    </media>
     
 	<administration>
 		<menu link="option=com_mapfactory" img="../components/com_mapfactory/assets/images/icons/map_factory_16.png">Map Factory</menu>
