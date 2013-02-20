@@ -38,7 +38,7 @@ class MapFactoryController extends JController {
 	function display($cachable = false)
 	{
 		// set default view if not set
-		JRequest::setVar('view', JRequest::getCmd('view', 'Files'));
+		JRequest::setVar('view', JRequest::getCmd('view', 'Default'));
 	
 		// call parent behavior
 		parent::display($cachable);
