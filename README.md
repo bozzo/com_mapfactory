@@ -9,15 +9,27 @@ com_mapfactory
 What is it? 
 -----------
 
-Joomla component com_mapfactory
-	
+	Map Factory is a Joomla component, which provide a map page to display 
+	tracks or just print a map. The supported map renderers are:
+	- OpenStreetMap
+	- OpenCycleMap
+	- OpenCycleMap - Landscape
+	- OpenCycleMap - Transport
+	- Google Map
+	- Google Hybrid
+	- Google Satelite
+	- Google Physical
+	- Geoportail 1:25000 (required an API key)
+	- Geoportail French Cadastre (required an API key)
+	- Geoportail Aerial Images (required an API key)
+
   
 Project Web Site
 ----------------
 
 	Documentation, code samples, reference, downloads can be found on 
 	the project web site:
-	http://xxxxxxxxxxxxxxxxxxxxxxxxx/
+	http://bozzo.github.com/com_mapfactory/
 
 License
 -------
