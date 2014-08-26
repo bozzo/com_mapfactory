@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+This file is part of com_mapfactory.
+
+com_mapfactory is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+com_mapfactory is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with com_mapfactory.  If not, see <http://www.gnu.org/licenses/>.
+
+Created on 12 sept. 2012
+By bozzo
+
+-->
+<metadata>
+	<layout title="trip">
+		<message>
+			<![CDATA[Display the trip section]]>
+		</message>
+	</layout>
+
+        <fields name="request">
+                <fieldset name="request">
+                        <field
+                                name="center_lat"
+                                type="text"
+                                label="CENTER_LAT"
+                                description="CENTER_LAT_DESC"
+                                default="0.0"/>
+                        <field
+                                name="center_lon"
+                                type="text"
+                                label="CENTER_LON"
+                                description="CENTER_LON_DESC"
+                                default="0.0"/>
+                </fieldset>
+        </fields>
+	<state>
+		<name>trip</name>
+		<description>Display the trip section</description>
+		<url/>
+		<params>
+			<param name="center_lat" type="text" default="0.0" label="Latitude du centre" description="Latitude du centre de la carte"/>
+			<param name="center_lon" type="text" default="0.0" label="Longitude du centre" description="Longitude du centre de la carte"/>
+		</params>
+	</state>
+</metadata>

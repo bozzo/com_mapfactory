@@ -51,7 +51,23 @@ defined('_JEXEC') or die('Accès interdit');
 	<h1>
 		<?php echo $this->msg; ?>
 	</h1>
-	<a id="Fullscreen_button" onclick="fullscreen()">Plein écran</a>
+	<div id="MapFactoryButtonBar" class="MapFactoryButtonDiv MapFactoryButtonDiv<?php echo floor((count($this->osmFile) + 2) / 6); ?>">
+		<a id="Fullscreen_button" class="MapFactoryBouton" onclick="fullscreen()">Plein écran</a>
+		<?php 
+			echo $this->getToogleIgnOsmButton();
+			$cpt=1;
+			foreach ($this->osmFile as $file)
+			{
+				if (preg_match ( "/\.(osm)|(gpx)/i", $file ))
+				{
+					?>
+					<a id="download_button_<?php echo $cpt; ?>" title="T&eacute;l&eacute;charger" class="MapFactoryBouton MapFactoryBoutonDl" href="images/gpx/<?php echo $file; ?>" download="<?php echo $file; ?>">&darr;&nbsp;<?php echo $file; ?></a>
+					<?php 
+					$cpt++;
+				}
+			}
+		?>
+	</div>
 	<div id="MapFactoryMap" class="MapFactoryMapSmallscreen"></div>
 	<script>
         <?php echo $this->getMap(); ?>

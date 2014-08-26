@@ -21,27 +21,13 @@
  *
  **/
  
-defined('_JEXEC') or die('Accès interdit');
-jimport('joomla.application.component.controller');
-
-class MapFactoryController extends JController {
-
-	function __construct() {
-		parent::__construct();
-	}
-	
-	/**
-	 * display task
-	 *
-	 * @return void
-	 */
-	function display($cachable = false)
-	{
-		// set default view if not set
-		JRequest::setVar('view', JRequest::getCmd('view', 'Files'));
-	
-		// call parent behavior
-		parent::display($cachable);
-	}
-}
+defined('_JEXEC') or die('Accès interdit'); 
 ?>
+
+<div class="component_simplethu">
+	<h1><?php echo $this->msg; ?></h1>
+	<div id="MapFactoryMap"></div>
+	<script>
+        <?php echo $this->getMap(); ?>
+    </script>
+</div>

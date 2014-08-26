@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
+<!-- 
+
 This file is part of com_mapfactory.
 
 com_mapfactory is free software: you can redistribute it and/or modify
@@ -17,21 +18,12 @@ along with com_mapfactory.  If not, see <http://www.gnu.org/licenses/>.
 
 Created on 12 sept. 2012
 By bozzo
+
 -->
-<form>
-        <fieldset>
-                <field
-                        name="id"
-                        type="hidden"
-                />
-                <field
-                        name="filename"
-                        type="text"
-                        label="COM_MAPFACTORY_FILE_FILENAME_LABEL"
-                        description="COM_MAPFACTORY_FILE_FILENAME_DESC"
-                        size="50"
-                        class="inputbox"
-                        default=""
-                />
-        </fieldset>
-</form>
+<metadata>
+	<view title="trip de Map Factory">
+		<message>
+			<![CDATA[Ecran qui affiche la liste des contenus]]>
+		</message>
+	</view>
+</metadata>

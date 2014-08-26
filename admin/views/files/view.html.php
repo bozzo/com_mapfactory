@@ -56,7 +56,7 @@ class MapFactoryViewFiles extends JView {
 	protected function addToolBar()
 	{
 		JToolBarHelper::title(JText::_('COM_MAPFACTORY_MANAGER_FILES'));
-		JToolBarHelper::media_manager('com_mapfactory','Upload');
+		JToolBarHelper::media_manager('gpx','Upload GPX File');
 		JToolBarHelper::addNew('file.add');
 		JToolBarHelper::editList('file.edit');
 		JToolBarHelper::deleteList('', 'files.delete');

@@ -1,6 +1,33 @@
 @CHARSET "UTF-8";
 
+.MapFactoryBouton:hover {
+	background-color: #333333 !important;
+	opacity: 0.8 !important;
+    color: #EEEEEE !important;
+}
+
+.MapFactoryBouton {
+	background-color: #333333 !important;
+    border: 1px solid #333333 !important;
+    border-radius: 3px !important;
+    color: #EEEEEE !important;
+    cursor: pointer !important;
+    display: block !important;
+    float: left !important;
+    font: 12px 'Titillium Maps',Arial !important;
+    height: 18px !important;
+    margin-bottom: 10px !important;
+    margin-right: 10px !important;
+	padding: 5px 10px !important;
+    text-align: center !important;
+    text-indent: 0 !important !important;
+    text-transform: uppercase !important;
+    vertical-align: middle !important;
+}
+
 #MapFactoryMap {
+	border: 1px solid #333333;
+    border-radius: 3px;
 	min-width: 100px;
 }
 
@@ -10,4 +37,22 @@
 
 .MapFactoryMapSmallscreen {
 	height: 600px;
+}
+
+.MapFactoryButtonDiv {
+	display: block;
+    float: none;
+    height: 40px;
+}
+
+.MapFactoryButtonDiv1 {
+    height: 80px !important;
+}
+
+.MapFactoryButtonDiv2 {
+    height: 120px !important;
+}
+
+.MapFactoryButtonDiv3 {
+    height: 160px !important;
 }

@@ -29,9 +29,11 @@ class MapFactoryViewMap extends JView {
 
 	private $center_lon;
 	private $center_lat;
+	private $zoomLevel;
 	private $gpApiKey;
 	private $mapKind;
-	private $osmFile;
+	private $type;
+	//private $osmFile;
 	private $osmTitle;
 	private $isGeoportail;
 	
@@ -42,17 +44,16 @@ class MapFactoryViewMap extends JView {
 	// Overwriting JView display method
 	function display($tpl = null)
 	{			
-		//$input = JFactory::getApplication()->input;
-		//$params = JComponentHelper::getParams(JReqest::getVar('option')); // Get parameter helper
-		//$params->get('parameter_name'); // Get an individual parameter
 		$app = JFactory::getApplication();
 		$params = $app->getParams();
+		$jinput = $app->input;
 
 		// Assign data to the view
 		$this->msg = $params->get('com_mapfactory_page_title');
 		$this->center_lon = $params->get('com_mapfactory_center_lon');
 		$this->center_lat = $params->get('com_mapfactory_center_lat');
 		$this->mapKind = $params->get('com_mapfactory_map_kind');
+		$this->zoomLevel = $params->get('com_mapfactory_map_zoom_level');
 		
 		// Geoportail
 		$this->gpApiKey = $params->get('com_mapfactory_gp_api_key');
@@ -66,6 +67,20 @@ class MapFactoryViewMap extends JView {
 		$this->osmWidth = $params->get('com_mapfactory_track_osm_width');		
 		$this->osmOpacity = $params->get('com_mapfactory_track_osm_opacity');		
 		$this->osmColor = $params->get('com_mapfactory_track_osm_color');	
+
+		$this->type = $jinput->get('type', 'none', 'STRING');
+		if ($this->type != null && $this->type == "osm")
+		{
+			$this->mapKind=self::$MAP_KIND_OSM;
+			if (! in_array("OSM",$this->osmLayers))
+			{
+				$this->osmLayers[]="OSM";
+			}
+		}
+		elseif ($this->type != null && $this->type == "ign")
+		{
+			$this->mapKind=self::$MAP_KIND_GEOP;
+		}
 		
 		$doc =& JFactory::getDocument();
 		$doc->addScript("http://code.jquery.com/jquery-latest.js");
@@ -90,54 +105,50 @@ class MapFactoryViewMap extends JView {
 		// Display the view
 		parent::display($tpl);
 	}
-
-	function getGpxLayer($varName)
-	{
-		$map = "	var layer = new OpenLayers.Layer.Vector(\"Rallye 2011 10km\", {";
-		$map .= "			strategies: [new OpenLayers.Strategy.Fixed()],";
-		$map .= "			style: {strokeColor: \"yellow\", strokeWidth: 5, strokeOpacity: 0.5},";
-		$map .= "			protocol: new OpenLayers.Protocol.HTTP({";
-		$map .= "			url: \"media/com_mapfactory/sanstitre.osm\",";
-		$map .= "			format: new OpenLayers.Format.GPX()";
-		$map .= "		}),";
-		$map .= "		projection: new OpenLayers.Projection(\"EPSG:4326\")";
-		$map .= "	});";
-
-		$map .= "	$varName.addLayers([layer]);";
-
+	
+	function getOsmLayer($varName, $file, $cpt) {
+		$map = "        $varName.addLayers([new OpenLayers.Layer.Vector(\"" . substr($file, 0, -4) . "\", {";
+		$map .= "                       strategies: [new OpenLayers.Strategy.Fixed()],";
+		$map .= "                       style: {strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity . "},";
+		$map .= "                       protocol: new OpenLayers.Protocol.HTTP({";
+		$map .= "                       url: \"images/gpx/" . $file . "\",";
+		
+		if (preg_match ( "/\.osm/", $file ))
+		{
+			$map .= "                       format: new OpenLayers.Format.OSM()";
+		}
+		elseif (preg_match ( "/\.gpx/", $file ))
+		{
+			$map .= "                       format: new OpenLayers.Format.GPX()";
+		}
+		$map .= "               }),";
+		$map .= "               projection: new OpenLayers.Projection(\"EPSG:4326\")";
+		$map .= "       })]);";
+		
 		return $map;
 	}
-
-	function getOsmLayer($varName)
-	{
-		$map = "	$varName.addLayers([new OpenLayers.Layer.Vector(\"" . $this->osmTitle . "\", {";
-		$map .= "			strategies: [new OpenLayers.Strategy.Fixed()],";
-		$map .= "			style: {strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity . "},";
-		$map .= "			protocol: new OpenLayers.Protocol.HTTP({";
-		$map .= "			url: \"media/com_mapfactory/" . $this->osmFile . "\",";
-		$map .= "			format: new OpenLayers.Format.OSM()";
-		$map .= "		}),";
-		$map .= "		projection: new OpenLayers.Projection(\"EPSG:4326\")";
-		$map .= "	})]);";
-
-		//$map .= "	$varName.addLayers([layer]);";
-
-		return $map;
-	}
-
-	function getOsmLayerGP($varName)
-	{
-		$map = "$varName.getMap().addLayer(\"OSM\",";
-		$map .= "\"" . $this->osmTitle . "\",";
-		$map .= "\"media/com_mapfactory/" . $this->osmFile . "\",";
+	
+	function getOsmLayerGP($varName, $file, $cpt) {
+		if (preg_match ( "/\.osm/i", $file ))
+		{
+			$map = "$varName.getMap().addLayer(\"OSM\",";
+		} 
+		elseif (preg_match ( "/\.gpx/i", $file ))
+		{
+			$map = "$varName.getMap().addLayer(\"GPX\",";
+		}
+		
+		$map .= "\"" . substr($file, 0, -4) . "\",";
+		$map .= "\"images/gpx/" . $file . "\",";
 		$map .= "{";
-		$map .= "	visibility:true,";
-		$map .= "	styleMap:OpenLayers.StyleMap({";
-		$map .= "		\"default\": new OpenLayers.Style(";
-		$map .= "			OpenLayers.Util.applyDefaults({";
-		$map .= "				strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity;
-		$map .= "			},OpenLayers.Feature.Vector.style[\"default\"]))";
+		$map .= "       visibility:true,";
+		$map .= "       styleMap:OpenLayers.StyleMap({";
+		$map .= "               \"default\": new OpenLayers.Style(";
+		$map .= "                       OpenLayers.Util.applyDefaults({";
+		$map .= "                               fillColor: \"" . $this->osmColor . "\", strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity;
+		$map .= "                       },OpenLayers.Feature.Vector.style[\"default\"]))";
 		$map .= "})});";
+	
 		
 		/*new OpenLayers.StyleMap({
 			"default": new OpenLayers.Style(
@@ -203,8 +214,8 @@ class MapFactoryViewMap extends JView {
 
 		$map .= "	viewer= new Geoportal.Viewer.Default('MapFactoryMap', OpenLayers.Util.extend(";
 		$map .= "		options,";
-		//$map .= "		// API keys configuration variable set by <Geoportal.GeoRMHandler.getConfig>";
-		//$map .= "		// variable contenant la configuration des clefs API remplie par <Geoportal.GeoRMHandler.getConfig>";
+		// API keys configuration variable set by <Geoportal.GeoRMHandler.getConfig>
+		// variable contenant la configuration des clefs API remplie par <Geoportal.GeoRMHandler.getConfig>
 		$map .= "		window.gGEOPORTALRIGHTSMANAGEMENT===undefined? {'apiKey':'" . $this->gpApiKey . "'} : gGEOPORTALRIGHTSMANAGEMENT)";
 		$map .= "	);";
 		
@@ -213,16 +224,21 @@ class MapFactoryViewMap extends JView {
 		$map .= "		return;";
 		$map .= "	}";
 
-		//$map .= "	// ----- Layers";
+		// ----- Layers
 		$map .= "	viewer.addGeoportalLayers(['ORTHOIMAGERY.ORTHOPHOTOS','GEOGRAPHICALGRIDSYSTEMS.MAPS']);";
 
-		if ($this->osmFile != '-1')
-		{
-			$map .= $this->getOsmLayerGP("viewer");
+		$cpt=1;
+        foreach ( $this->osmFile as $file )
+        {
+        	if (preg_match ( "/\.(osm)|(gpx)/i", $file ))
+			{	
+				$map .= $this->getOsmLayerGP ( "viewer", $file, $cpt );
+				$cpt ++;
+			}
 		}
-		
-		//$map .= "	// ----- Autres";
-		$map .= "	viewer.getMap().setCenterAtLonLat(" . $this->center_lat . "," . $this->center_lon . ");";
+				
+		// ----- Autres
+		$map .= "	viewer.getMap().setCenterAtLonLat(" . $this->center_lat . "," . $this->center_lon . ", " . $this->zoomLevel . ");";
 		
 		$map .= "}";
 
@@ -254,17 +270,23 @@ class MapFactoryViewMap extends JView {
 		if (in_array("GPhysical",$this->osmLayers)) 	$map .= $this->addGoogleMapPhysical("map");
 		if (in_array("GHybrid",$this->osmLayers)) 		$map .= $this->addGoogleMapHybrid("map");
 
-		if ($this->osmFile != '-1')
-		{
-			$map .= $this->getOsmLayer("map");
+	 	$cpt=1;
+        foreach ( $this->osmFile as $file )
+        {
+			if (preg_match ( "/\.(osm)|(gpx)/i", $file ))
+			{	
+				$map .= $this->getOsmLayer ( "map", $file, $cpt );
+				$cpt ++;
+			}
 		}
 		
 		$map .= "	map.setCenter(new OpenLayers.LonLat(" . $this->center_lat . "," . $this->center_lon . ")";
 		$map .= "		.transform(";
 		$map .= "		new OpenLayers.Projection(\"EPSG:4326\"),";
 		$map .= "		new OpenLayers.Projection(\"EPSG:900913\")";
-		$map .= "		), 15";
+		$map .= "		), " . $this->zoomLevel;
 		$map .= "	);";
+    	//$map .= "	map.zoomToMaxExtent();";
 		
 		$map .= "}";
 
@@ -372,6 +394,26 @@ class MapFactoryViewMap extends JView {
 		$map .= "$('#Fullscreen_button').bind('onclick', function() {";
 		$map .= "	$('#Fullscreen_button').fullScreen(($(document).fullScreen() ? 'false' : 'true'));";
 		$map .= "});";
+
+		return $map;
+	}
+
+	function getToogleIgnOsmButton()
+	{		
+		$map = "";
+		switch ($this->mapKind)
+		{
+			case self::$MAP_KIND_GMAP :
+			case self::$MAP_KIND_OSM :
+				if ($this->gpApiKey != null && $this->gpApiKey != "")
+				{
+					$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JURI::current() .'?type=ign">Carte IGN</a>';
+				}
+				break;
+			case self::$MAP_KIND_GEOP:
+				$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JURI::current() .'?type=osm">Carte OSM</a>';
+				break;
+		}
 
 		return $map;
 	}

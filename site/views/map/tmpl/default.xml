@@ -46,6 +46,12 @@ By bozzo
                 label="COM_MAPFACTORY_CENTER_LON_PARAM_LABEL"
                 type="text" />
 
+            <field name="com_mapfactory_map_zoom_level"
+                default="10"
+                description="COM_MAPFACTORY_ZOOM_LEVEL_PARAM_DESC"
+                label="COM_MAPFACTORY_ZOOM_LEVEL_PARAM_LABEL"
+                type="text" />
+
             <field name="com_mapfactory_map_kind" 
                 type="list" 
                 default="OSM" 
@@ -92,17 +98,17 @@ By bozzo
         	    name="myspacer"
 				label="COM_MAPFACTORY_TRACK_LABEL" />
    
-            
             <field name="com_mapfactory_track_osm_file" 
                 type="filelist" 
                 default="" 
                 label="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_LABEL" 
                 description="COM_MAPFACTORY_TRACK_OSM_FILE_PARAM_DESC" 
-                directory="images/com_mapfactory/osm" 
-                filter="\.osm$" 
+                directory="images/gpx" 
+                filter="\.(osm)|(gpx)|(OSM)|(GPX)$" 
                 exclude="" 
                 stripext=""
-				hide_default="true"/>
+                multiple="true"
+                hide_default="true"/>
             
             <field name="com_mapfactory_track_osm_title"
                 default=""
@@ -134,7 +140,12 @@ By bozzo
     <!-- <fields name="request" >
 
         <fieldset name="request" >
-
+			<field
+                name="type"
+                default="osm"
+                description="MAP_TYPE_DESC"
+                label="MAP_TYPE"
+                type="text" />
             <field
                 name="center_lat"
                 default="0.0"

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<!--
+This file is part of com_mapfactory.
+
+com_mapfactory is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+com_mapfactory is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with com_mapfactory.  If not, see <http://www.gnu.org/licenses/>.
+
+Created on 12 sept. 2012
+By bozzo
+-->
+<extension type="component" version="2.5.0" method="upgrade">
+	<name>Map Factory</name>
+	<creationDate>Septembre 2012</creationDate>
+	<author>Boris Barnier</author>
+	<authorEmail>b.barnier@gmail.com</authorEmail>
+	<authorUrl></authorUrl>
+	<copyright>(C) 2012 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU/GPLv3</license>
+	<version>0.0.1</version>
+	<description>Composant de permettant de visualiser une carte OSM, gMaps, Geoportail...</description>
+
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>mapfactory.php</filename>
+		<filename>controller.php</filename>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>assets</folder>
+	</files>
+	
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall -->
+    	<sql>
+        	<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+    	</sql>
+    </uninstall>
+    <update> <!-- Runs on update; New in 2.5 -->
+    	<schemas>
+        	<schemapath type="mysql">sql/updates/mysql</schemapath>
+    	</schemas>
+    </update>
+        
+	<media folder="media" destination="com_mapfactory">
+	    <folder>css</folder>
+    </media>
+    
+	<administration>
+		<menu link="option=com_mapfactory" img="../components/com_mapfactory/assets/images/icons/map_factory_16.png">Map Factory</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+            <filename>mapfactory.php</filename>
+            <filename>controller.php</filename>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>models</folder>
+            <!-- views files section -->
+            <folder>views</folder>
+            <!-- controllers files section -->
+            <folder>controllers</folder>
+    	</files>                
+		
+		<languages folder="admin/language">
+			<language tag="en-GB">en-GB/en-GB.com_mapfactory.ini</language>
+			<language tag="fr-FR">fr-FR/fr-FR.com_mapfactory.ini</language>
+		</languages>
+	</administration>
+</extension>
