@@ -37,6 +37,7 @@ By bozzo
 		<filename>index.html</filename>
 		<filename>mapfactory.php</filename>
 		<filename>controller.php</filename>
+		<filename>router.php</filename>
 		<folder>models</folder>
 		<folder>views</folder>
 		<folder>assets</folder>

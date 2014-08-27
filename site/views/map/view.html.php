@@ -111,7 +111,7 @@ class MapFactoryViewMap extends JView {
 		$map .= "                       strategies: [new OpenLayers.Strategy.Fixed()],";
 		$map .= "                       style: {strokeColor: \"" . $this->osmColor . "\", strokeWidth: " . $this->osmWidth . ", strokeOpacity: " . $this->osmOpacity . "},";
 		$map .= "                       protocol: new OpenLayers.Protocol.HTTP({";
-		$map .= "                       url: \"images/gpx/" . $file . "\",";
+		$map .= "                       url: \"/images/gpx/" . $file . "\",";
 		
 		if (preg_match ( "/\.osm/", $file ))
 		{
@@ -139,7 +139,7 @@ class MapFactoryViewMap extends JView {
 		}
 		
 		$map .= "\"" . substr($file, 0, -4) . "\",";
-		$map .= "\"images/gpx/" . $file . "\",";
+		$map .= "\"/images/gpx/" . $file . "\",";
 		$map .= "{";
 		$map .= "       visibility:true,";
 		$map .= "       styleMap:OpenLayers.StyleMap({";
@@ -407,11 +407,11 @@ class MapFactoryViewMap extends JView {
 			case self::$MAP_KIND_OSM :
 				if ($this->gpApiKey != null && $this->gpApiKey != "")
 				{
-					$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JURI::current() .'?type=ign">Carte IGN</a>';
+					$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JRoute::_('index.php?view=map&type=ign') . '">Carte IGN</a>';
 				}
 				break;
 			case self::$MAP_KIND_GEOP:
-				$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JURI::current() .'?type=osm">Carte OSM</a>';
+				$map = '<a id="IgnOsm_button" class="MapFactoryBouton" href="' . JRoute::_('index.php?view=map&type=osm') . '">Carte OSM</a>';
 				break;
 		}
 
